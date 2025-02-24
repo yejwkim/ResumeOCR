@@ -1,0 +1,5 @@
+pytesseract==0.3.10
+jupyterlab
+shapely
+scikit-learn
+pdf2image
