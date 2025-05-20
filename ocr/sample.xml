@@ -1,0 +1,60 @@
+<View>
+  <Image name="image" value="$image" zoom="true" rotate="true" maxWidth="1000px"/>
+  
+  <RectangleLabels name="label" toName="image">
+    <!-- Work Experience -->
+    <Label value="B-JobTitle" background="blue"/>
+    <Label value="I-JobTitle" background="blue"/>
+    <Label value="B-Company" background="green"/>
+    <Label value="I-Company" background="green"/>
+    <Label value="B-Dates" background="orange"/>
+    <Label value="I-Dates" background="orange"/>
+    <Label value="B-Location" background="#8a2be2"/>
+    <Label value="I-Location" background="#8a2be2"/>
+    <Label value="B-ExperienceDesc" background="gold"/>
+    <Label value="I-ExperienceDesc" background="gold"/>
+    
+    <!-- Education -->
+    <Label value="B-Education" background="purple"/>
+    <Label value="I-Education" background="purple"/>
+    <Label value="B-GPA" background="#cd5c5c"/>
+    <Label value="I-GPA" background="#cd5c5c"/>
+    
+    <!-- Skills & Tools -->
+    <Label value="B-Skill" background="teal"/>
+    <Label value="I-Skill" background="teal"/>
+    <Label value="B-Tool" background="#2e8b57"/>
+    <Label value="I-Tool" background="#2e8b57"/>
+    
+    <!-- Projects -->
+    <Label value="B-Project" background="brown"/>
+    <Label value="I-Project" background="brown"/>
+    <Label value="B-ProjectDesc" background="#b8860b"/>
+    <Label value="I-ProjectDesc" background="#b8860b"/>
+    
+    <!-- Certifications & Awards -->
+    <Label value="B-Certification" background="red"/>
+    <Label value="I-Certification" background="red"/>
+    <Label value="B-Award" background="#dc143c"/>
+    <Label value="I-Award" background="#dc143c"/>
+    
+    <!-- Publications -->
+    <Label value="B-Publication" background="#4682b4"/>
+    <Label value="I-Publication" background="#4682b4"/>
+    
+    <!-- Extracurriculars & Other -->
+    <Label value="B-Volunteer" background="#ff7f50"/>
+    <Label value="I-Volunteer" background="#ff7f50"/>
+    <Label value="B-Organization" background="#20b2aa"/>
+    <Label value="I-Organization" background="#20b2aa"/>
+    <Label value="B-Interest" background="#daa520"/>
+    <Label value="I-Interest" background="#daa520"/>
+    <Label value="B-Language" background="#00ced1"/>
+    <Label value="I-Language" background="#00ced1"/>
+    <Label value="B-Summary" background="#1e90ff"/>
+    <Label value="I-Summary" background="#1e90ff"/>
+    
+    <!-- Default -->
+    <Label value="O" background="gray"/>
+  </RectangleLabels>
+</View>

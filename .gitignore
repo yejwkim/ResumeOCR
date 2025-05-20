@@ -1,3 +1,4 @@
 .env
-Processed/
-Resumes
+data/
+archive/
+mypy.ini
