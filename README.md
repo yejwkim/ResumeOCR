@@ -20,6 +20,12 @@ resume-ocr/
 ```
 
 ## ✅ Prerequisities
+Create a virtual environment (Recommended):
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
 Install required packages:
 ```bash
 pip install -r requirements.txt

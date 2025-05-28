@@ -3,8 +3,8 @@ import os
 from pdf2image import convert_from_path
 from tqdm import tqdm
 
-pdf_folder = "../data/raw_resumes"
-output_folder = "../data/images"
+pdf_folder = "data/raw_resumes"
+output_folder = "data/images"
 os.makedirs(output_folder, exist_ok=True)
 pdf_files = [f for f in os.listdir(pdf_folder) if f.lower().endswith(".pdf")]
 

@@ -3,3 +3,6 @@ jupyterlab
 shapely
 scikit-learn
 pdf2image
+tqdm
+types-tqdm
+label-studio

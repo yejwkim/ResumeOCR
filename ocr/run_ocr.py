@@ -4,8 +4,8 @@ import os
 import json
 from tqdm import tqdm
 
-input_folder = "../data/images"
-output_folder = "../data/ocr_output"
+input_folder = "data/images"
+output_folder = "data/ocr_output"
 os.makedirs(output_folder, exist_ok=True)
 image_base_url = "http://localhost:8080" # Change if necessary
 resume_dirs = [d for d in os.listdir(input_folder) if os.path.isdir(os.path.join(input_folder, d))]
