@@ -20,7 +20,7 @@ for resume_dir in tqdm(resume_dirs, desc="Processing Resumes"):
         image = Image.open(image_path)
         width, height = image.size
         data = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT)
-        results = []
+        results, ocr_data = [], []
         
         for i, word in enumerate(data["text"]):
             word = word.strip()
@@ -30,6 +30,11 @@ for resume_dir in tqdm(resume_dirs, desc="Processing Resumes"):
                 y_pct = (y / height) * 100
                 w_pct = (w / width) * 100
                 h_pct = (h / height) * 100
+
+                ocr_data.append({
+                    "text": word,
+                    "bbox": [x_pct, y_pct, x_pct + w_pct, y_pct + h_pct]
+                })
 
                 results.append({
                     "id": f"{resume_dir}_{i}",
@@ -44,14 +49,15 @@ for resume_dir in tqdm(resume_dirs, desc="Processing Resumes"):
                         "y": y_pct,
                         "width": w_pct,
                         "height": h_pct,
-                        "labels": ["O"]
+                        "rectanglelabels": ["O"]
                     }
                 })
 
         image_url = f"{image_base_url}/{resume_dir}/{image_file}"
         task = {
             "data": {
-                "image": image_url
+                "image": image_url,
+                "ocr_data": ocr_data
             },
             "annotations": [{
                 "result": results
@@ -64,4 +70,4 @@ output_path = os.path.join(output_folder, "import.json")
 with open(output_path, "w") as f:
     json.dump(label_studio_tasks, f, indent=2)
 
-print("OCR extraction complete. JSON files saved in 'data/ocr_output/'")
+print("OCR extraction complete. JSON file saved in 'data/ocr_output/import.json'")

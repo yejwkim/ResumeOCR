@@ -6,3 +6,8 @@ pdf2image
 tqdm
 types-tqdm
 label-studio
+datasets
+transformers
+torchvision
+pytorch-lightning
+accelerate # For GPU

@@ -59,7 +59,7 @@ This will:
 In a terminal:
 ```bash
 cd data/images
-python ../../ocr/cors_http_server.py
+python ../../labeling/cors_http_server.py
 ```
 This exposes images on `http://localhost:8080`.
 
