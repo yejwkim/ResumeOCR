@@ -19,6 +19,7 @@ with open(IN) as f_in, open(OUT, "w") as f_out:
         image_path = raw_url.replace("http://localhost:8080", "data/images")
         ocr_data = entry["data"]['ocr_data']
         annotations = entry["annotations"][0]["result"]
+        id = entry["annotations"][0]["id"]
         pairs, unmatched = [], []
         
         for ann in annotations: # Single annotation
@@ -34,7 +35,7 @@ with open(IN) as f_in, open(OUT, "w") as f_out:
                 unmatched.append(ann_box)
         
         if unmatched:
-            print(f"[!] {len(unmatched)} boxes in {image_path} failed to match OCR tokens.")
+            print(f"[!] {len(unmatched)} boxes in {image_path} with ID {id} failed to match OCR tokens.")
             continue
 
         words, bboxes, labels = [], [], []

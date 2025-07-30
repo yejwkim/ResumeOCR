@@ -17,20 +17,24 @@
     <!-- Education -->
     <Label value="B-Education" background="purple"/>
     <Label value="I-Education" background="purple"/>
+    <Label value="B-Major" background="pink"/>
+    <Label value="I-Major" background="pink"/>
+    <Label value="B-Coursework" background="cyan"/>
+    <Label value="I-Coursework" background="cyan"/>
     <Label value="B-GPA" background="#cd5c5c"/>
     <Label value="I-GPA" background="#cd5c5c"/>
     
     <!-- Skills & Tools -->
     <Label value="B-Skill" background="teal"/>
     <Label value="I-Skill" background="teal"/>
-    <Label value="B-Tool" background="#2e8b57"/>
-    <Label value="I-Tool" background="#2e8b57"/>
     
     <!-- Projects -->
     <Label value="B-Project" background="brown"/>
     <Label value="I-Project" background="brown"/>
     <Label value="B-ProjectDesc" background="#b8860b"/>
     <Label value="I-ProjectDesc" background="#b8860b"/>
+    <Label value="B-ProjectRole" background="#b8b60b"/>
+    <Label value="I-ProjectRole" background="#b8b60b"/>
     
     <!-- Certifications & Awards -->
     <Label value="B-Certification" background="red"/>
@@ -43,10 +47,12 @@
     <Label value="I-Publication" background="#4682b4"/>
     
     <!-- Extracurriculars & Other -->
-    <Label value="B-Volunteer" background="#ff7f50"/>
-    <Label value="I-Volunteer" background="#ff7f50"/>
     <Label value="B-Organization" background="#20b2aa"/>
     <Label value="I-Organization" background="#20b2aa"/>
+    <Label value="B-OrgDesc" background="#ff7f50"/>
+    <Label value="I-OrgDesc" background="#ff7f50"/>
+    <Label value="B-OrgRole" background="#0f7f50"/>
+    <Label value="I-OrgRole" background="#0f7f50"/>
     <Label value="B-Interest" background="#daa520"/>
     <Label value="I-Interest" background="#daa520"/>
     <Label value="B-Language" background="#00ced1"/>
@@ -55,6 +61,8 @@
     <Label value="I-Summary" background="#1e90ff"/>
     
     <!-- Default -->
+    <Label value="B-SectionHeader" background="#1e90ff"/>
+    <Label value="I-SectionHeader" background="#1e90ff"/>
     <Label value="O" background="gray"/>
   </RectangleLabels>
 </View>

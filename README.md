@@ -82,9 +82,15 @@ Go to `http://localhost:8081`, log in, and create a new project.
 - Save annotations after completing each page.
 
 ## 📤 Exporting Labeled Data
-🚧 [Coming Soon]
-- Export annotations in JSON format
-- Convert to Hugging Face `datasets.Dataset` format for LayoutLMv3 training
+### 1. Export Labeled Data
+- When done with labeling in Label Studio, export the annotations in JSON format.
+
+### 2. Convert to Hugging Face `datasets.Dataset` format for LayoutLMv3 training
+Run:
+```bash
+python hf/ls_to_hf.py
+```
+This will convert the annotations into the HF format for training at `data/hf_dataset.jsonl`.
 
 ## 🤖 Model Training: LayoutLMv3
 🚧 [Coming Soon]
