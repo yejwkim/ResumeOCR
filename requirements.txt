@@ -10,4 +10,8 @@ datasets
 transformers
 torchvision
 pytorch-lightning
+evaluate
+seqeval
+wandb
+huggingface_hub
 accelerate # For GPU

@@ -2,3 +2,4 @@
 data/
 archive/
 venv/
+wandb/
