@@ -10,3 +10,5 @@ Hyperparameter Tuning Log
 1. Baseline (F1: 0.0013)
 2. Fine-tune head + last two layers with a single LR (F1: 0.0315)
 3. Two-stage optimizer with layer-wise LRs (F1: 0.2979)
+4. AMP Clipping (F1: 0.38123)
+5. Longer Epoch, Faster Unfreeze, Re-warmup (F1: 0.4431)

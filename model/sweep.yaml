@@ -1,0 +1,23 @@
+program: train_model.py
+method: grid
+metric:
+  name: val_f1
+  goal: maximize
+parameters:
+  encoder_lr:
+    values: [1e-5, 2e-5, 3e-5]
+  head_lr:
+    values: [3e-4, 5e-4]
+  layer_decay:
+    value: 0.8
+  head_only_epochs:
+    value: 1
+  enc_rewarm_steps:
+    value: 200
+  epochs:
+    value: 30
+early_terminate:
+  type: hyperband
+  s: 2
+  eta: 3
+  max_iter: 30
