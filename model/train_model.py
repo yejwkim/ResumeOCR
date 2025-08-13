@@ -12,6 +12,7 @@ import evaluate
 from tqdm.auto import tqdm
 import wandb
 from huggingface_hub import login
+import os
 
 print("Import complete.")
 
@@ -55,6 +56,13 @@ weight_decay = float(config.weight_decay)
 warmup_ratio = float(config.warmup_ratio)
 head_only_epochs = int(config.head_only_epochs)
 enc_rewarm_steps = int(getattr(config, "enc_rewarm_steps", 200))
+
+# For Google Colab (Change directory if ran local)
+CKPT_DIR = os.getenv("CKPT_DIR", "/content/ckpts")
+os.makedirs(CKPT_DIR, exist_ok=True)
+run_id = wandb.run.id if wandb.run and hasattr(wandb.run, "id") else "unknown"
+best_ckpt_path = os.path.join(CKPT_DIR, f"best_{run_id}.pt")
+last_best_path = None
 
 # Label Extraction & Mapping
 all_label_names = set()
@@ -315,22 +323,33 @@ try:
         if f1 > best_f1:
             best_f1 = f1
             no_improve = 0
-            torch.save(
-                {
-                    "model": model.state_dict(),
-                    "optimizer": optimizer.state_dict(),
-                    "scheduler": scheduler.state_dict(),
-                    "config": dict(config),
-                    "epoch": epoch,
-                    "best_f1": best_f1,
-                }, "best_model.pt"
-            )
-            run_id = wandb.run.id if wandb.run and hasattr(wandb.run, "id") else "unknown"
-            artifact = wandb.Artifact(f"layoutlmv3-resume-{run_id}", type="model", 
-                                    metadata={"f1": best_f1, "epoch": epoch})
-            artifact.add_file("best_model.pt")
-            wandb.log_artifact(artifact, aliases=["best", f"epoch-{epoch}"])
-            print("New best F1, saving model.")
+            try:
+                payload = {
+                        "model": model.state_dict(),
+                        "optimizer": optimizer.state_dict(),
+                        "scheduler": scheduler.state_dict(),
+                        "config": dict(config),
+                        "epoch": epoch,
+                        "best_f1": best_f1,
+                }
+                torch.save(payload, best_ckpt_path)
+                
+                if last_best_path and last_best_path != best_ckpt_path and os.path.exists(last_best_path):
+                    try:
+                        os.remove(last_best_path)
+                    except OSError:
+                        print(f"{last_best_path} removal failed.")
+                        pass
+                last_best_path = best_ckpt_path
+                
+                run_id = wandb.run.id if wandb.run and hasattr(wandb.run, "id") else "unknown"
+                artifact = wandb.Artifact(f"layoutlmv3-resume-{run_id}", type="model", 
+                                        metadata={"f1": best_f1, "epoch": epoch})
+                artifact.add_file(best_ckpt_path)
+                wandb.log_artifact(artifact, aliases=["best", f"epoch-{epoch}"])
+                print(f"New best F1, saved to {best_ckpt_path}.")
+            except Exception as e:
+                print(f"Checkpoint save/upload error: {e}. Continuing training.")
         else:
             no_improve += 1
             if no_improve >= patience:
