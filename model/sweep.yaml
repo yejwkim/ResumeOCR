@@ -30,10 +30,25 @@ early_terminate:
 #   head_lr:
 #     value: 5e-4
 #   layer_decay:
+#     value: 0.8
+#   head_only_epochs:
+#     value: 1
+#   enc_rewarm_steps:
+#     values: [100, 200, 300]
+#   epochs:
+#     value: 30
+
+# Phase 3
+# parameters:
+#   encoder_lr:
+#     value: 3e-5
+#   head_lr:
+#     value: 5e-4
+#   layer_decay:
 #     values: [0.7, 0.8, 0.9]
 #   head_only_epochs:
 #     values: [0, 1]
 #   enc_rewarm_steps:
-#     values: [100, 200, 300]
+#     value: 200
 #   epochs:
 #     value: 30

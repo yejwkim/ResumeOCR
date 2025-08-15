@@ -16,19 +16,8 @@ import os
 
 print("Import complete.")
 
-# Device & Seed Setup
+# HF + W&B Setup
 login()
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-seed = 42
-random.seed(seed)
-np.random.seed(seed)
-torch.manual_seed(seed)
-torch.backends.cudnn.deterministic = True
-torch.backends.cudnn.benchmark = False
-if device.type == "cuda":
-    torch.cuda.manual_seed_all(seed)
-
-# W&B Setup
 wandb.init(
     project="resume-ocr",
     entity="yejwkim-the-university-of-texas-at-austin",
@@ -36,14 +25,14 @@ wandb.init(
         "epochs": 30,
         "batch_size": 2,
         "head_lr": 5e-4,
-        "encoder_lr": 1e-5,
-        "layer_decay": 0.8,
+        "encoder_lr": 3e-5,
+        "layer_decay": 0.7,
         "weight_decay": 0.01,
         "warmup_ratio": 0.1,
         "model": "microsoft/layoutlmv3-base",
         "head_only_epochs": 1,
         "enc_rewarm_steps": 200,
-        "seed": seed
+        "seed": 42
     }
 )
 config = wandb.config
@@ -56,6 +45,18 @@ weight_decay = float(config.weight_decay)
 warmup_ratio = float(config.warmup_ratio)
 head_only_epochs = int(config.head_only_epochs)
 enc_rewarm_steps = int(getattr(config, "enc_rewarm_steps", 200))
+seed = int(config.seed)
+data_seed = 42
+
+# Device & Seed Setup
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+random.seed(seed)
+np.random.seed(seed)
+torch.manual_seed(seed)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+if device.type == "cuda":
+    torch.cuda.manual_seed_all(seed)
 
 # For Google Colab (Change directory if ran local)
 CKPT_DIR = os.getenv("CKPT_DIR", "/content/ckpts")
@@ -145,7 +146,7 @@ print("HuggingFace & optimizer setup complete.")
 
 # Load Dataset
 raw = load_dataset("json", data_files={"train": "data/hf_dataset.jsonl"}, split="train")
-split = raw.train_test_split(test_size=0.1, seed=seed)
+split = raw.train_test_split(test_size=0.1, seed=data_seed)
 train_raw = split["train"]
 val_raw = split["test"]
 print("Dataset loading complete.")
